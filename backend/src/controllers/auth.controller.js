@@ -70,8 +70,24 @@ export const login = async (req, res) => {
       message: "login successfull",
       user,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return res.status(404).send({
+      message: "error in login",
+      error,
+    });
+  }
 };
 export const logout = (req, res) => {
-  res.send("logout route");
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.status(200).send({
+      message: "logged out successfully",
+    });
+  } catch (error) {
+    return res.status(404).send({
+      message: "error in logout",
+      error,
+    });
+  }
 };
