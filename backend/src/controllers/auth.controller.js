@@ -102,7 +102,7 @@ export const updateProfile = async (req, res) => {
       });
     }
     const uploadRes = await cloudinary.uploader.upload(profilePic);
-    const updatedUser = User.findByIdAndUpdate(
+    const updatedUser = await User.findByIdAndUpdate(
       userId,
       {
         profilePic: uploadRes.secure_url,
@@ -115,7 +115,7 @@ export const updateProfile = async (req, res) => {
     });
   } catch (error) {
     return res.status(404).send({
-      message: "error in logout",
+      message: "error in upload",
       error,
     });
   }

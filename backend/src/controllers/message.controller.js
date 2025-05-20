@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
-
+import cloudinary from "../lib/cloudinary.js";
 export const getUsersForSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
@@ -8,7 +8,7 @@ export const getUsersForSidebar = async (req, res) => {
       _id: { $ne: loggedInUserId },
     }).select("-password");
     res.status(200).send({
-      message: "users fetched successfully",
+      // message: "users fetched successfully",
       fileteredUsers,
     });
   } catch (error) {
